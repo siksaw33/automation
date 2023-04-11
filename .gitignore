@@ -127,3 +127,23 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VBA files
+*.xlsm
+*.xlam
+*.docm
+*.dotm
+*.ppsm
+*.pptm
+*.sldm
+*.potm
+*.ppam
+*.pptx
+*.sldx
+*.potx
