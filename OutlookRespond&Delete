@@ -12,11 +12,6 @@ Sub DeclineAndDelete()
    
     Application.ActiveExplorer.Selection.Item(1).Delete
     
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
-    
     Set cAppt = Nothing
     Set oResponse = Nothing
 
@@ -34,11 +29,6 @@ Sub AcceptAndDelete()
     Set oResponse = cAppt.Respond(olMeetingAccepted, True)
     oResponse.Send
     Application.ActiveExplorer.Selection.Item(1).Delete
-    
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
     
     Set cAppt = Nothing
     Set oResponse = Nothing
@@ -61,11 +51,6 @@ Sub DeclineandMessage()
     
     oResponse.Send
     Application.ActiveExplorer.Selection.Item(1).Delete
-    
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
     
     Set cAppt = Nothing
     Set oResponse = Nothing
