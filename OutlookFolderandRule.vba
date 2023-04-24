@@ -25,13 +25,13 @@ Sub CreateSenderFolderAndRule()
     
     ' Check if the sender of the email is already a folder
     On Error Resume Next
-    Set objSenderFolder = objInbox.Folders(objMail.SenderEmailAddress)
+    Set objSenderFolder = objInbox.Folders(objMail.SenderName)
     On Error GoTo 0
     
     ' If the folder does not exist, create it
     If objSenderFolder Is Nothing Then
         ' Create a folder with the name of the sender
-        strFolderName = objMail.SenderEmailAddress
+        strFolderName = objMail.SenderName
         Set objSenderFolder = objInbox.Folders.Add(strFolderName, olFolderInbox)
     End If
     
@@ -45,7 +45,7 @@ Sub CreateSenderFolderAndRule()
     Next objExistingRule
     
     ' Create the new rule
-    Set objRule = objRules.Create("Move messages from " & objMail.SenderEmailAddress, olRuleReceive)
+    Set objRule = objRules.Create("Move messages from " & objMail.SenderName, olRuleReceive)
     Set objCondition = objRule.Conditions.SenderAddress
     With objCondition
         .Enabled = True
