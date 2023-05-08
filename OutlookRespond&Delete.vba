@@ -11,9 +11,6 @@ Sub DeclineAndDelete()
         Set oResponse = cAppt.Respond(olMeetingDeclined, True)
         oResponse.Send
 
-        ' Clear selection if a response is sent
-        Application.ActiveExplorer.CurrentFolder.Items(1).Display
-        Application.ActiveExplorer.ClearSelection
         Application.ActiveExplorer.Selection.Item(1).Delete
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Respond (olMeetingDeclined)
@@ -39,9 +36,7 @@ Sub AcceptAndDelete()
         Set oResponse = cAppt.Respond(olMeetingAccepted, True)
         oResponse.Send
 
-        ' Mark next item as read
-        Application.ActiveExplorer.CurrentFolder.Items(1).Display
-        Application.ActiveExplorer.ClearSelection
+
     Else ' if no response is needed, just accept the meeting without sending a response
         cAppt.Respond (olMeetingAccepted)
 
@@ -69,9 +64,6 @@ Sub DeclineandMessage()
 
         Application.ActiveExplorer.Selection.Item(1).Delete
 
-        ' Mark next item as read
-        Application.ActiveExplorer.CurrentFolder.Items(1).Display
-        Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Respond (olMeetingDeclined)
         Application.ActiveExplorer.Selection.Item(1).Delete
