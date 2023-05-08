@@ -17,6 +17,8 @@ Sub DeclineAndDelete()
         Application.ActiveExplorer.Selection.Item(1).Delete
     End If
 
+    ' Mark first item in Deleted Items folder as read
+    Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
 
     Set cAppt = Nothing
     Set oResponse = Nothing
@@ -64,11 +66,14 @@ Sub DeclineandMessage()
 
         Application.ActiveExplorer.Selection.Item(1).Delete
 
+
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Respond (olMeetingDeclined)
         Application.ActiveExplorer.Selection.Item(1).Delete
     End If
 
+    ' Mark first item in Deleted Items folder as read
+    Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
 
     Set cAppt = Nothing
     Set oResponse = Nothing
