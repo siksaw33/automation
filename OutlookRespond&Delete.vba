@@ -18,7 +18,7 @@ Sub DeclineAndDelete()
     End If
 
     ' Mark first item in Deleted Items folder as read
-    Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
+    'Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
 
     Set cAppt = Nothing
     Set oResponse = Nothing
@@ -73,7 +73,7 @@ Sub DeclineandMessage()
     End If
 
     ' Mark first item in Deleted Items folder as read
-    Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
+    'Application.ActiveExplorer.CurrentFolder.Parent.Folders("Deleted Items").Items(1).UnRead = False
 
     Set cAppt = Nothing
     Set oResponse = Nothing
