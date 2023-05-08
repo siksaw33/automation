@@ -16,8 +16,7 @@ Sub DeclineAndDelete()
         Application.ActiveExplorer.ClearSelection
         Application.ActiveExplorer.Selection.Item(1).Delete
     Else ' if no response is needed, just decline the meeting without sending a response
-        cAppt.Decline
-        cAppt.MeetingStatus = olMeetingDeclined
+        cAppt.Respond (olMeetingDeclined)
     End If
 
 
@@ -45,8 +44,7 @@ Sub AcceptAndDelete()
         Application.ActiveExplorer.CurrentFolder.Items(1).Display
         Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just accept the meeting without sending a response
-        cAppt.Accept
-        cAppt.MeetingStatus = olMeetingAccepted
+        cAppt.Respond (olMeetingAccepted)
 
     End If
 
@@ -76,9 +74,7 @@ Sub DeclineandMessage()
         Application.ActiveExplorer.CurrentFolder.Items(1).Display
         Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just decline the meeting without sending a response
-        cAppt.Decline
-        cAppt.MeetingStatus = olMeetingDeclined
-
+        cAppt.Respond (olMeetingDeclined)
     End If
 
 
