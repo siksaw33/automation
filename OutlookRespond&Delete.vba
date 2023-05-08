@@ -17,6 +17,7 @@ Sub DeclineAndDelete()
         Application.ActiveExplorer.Selection.Item(1).Delete
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Respond (olMeetingDeclined)
+        Application.ActiveExplorer.Selection.Item(1).Delete
     End If
 
 
@@ -75,6 +76,7 @@ Sub DeclineandMessage()
         Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Respond (olMeetingDeclined)
+        Application.ActiveExplorer.Selection.Item(1).Delete
     End If
 
 
