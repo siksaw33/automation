@@ -39,8 +39,6 @@ Sub AcceptAndDelete()
         Set oResponse = cAppt.Respond(olMeetingAccepted, True)
         oResponse.Send
 
-        Application.ActiveExplorer.Selection.Item(1).Delete
-
         ' Mark next item as read
         Application.ActiveExplorer.CurrentFolder.Items(1).Display
         Application.ActiveExplorer.ClearSelection
