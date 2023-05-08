@@ -10,16 +10,16 @@ Sub DeclineAndDelete()
         Dim oResponse As MeetingItem
         Set oResponse = cAppt.Respond(olMeetingDeclined, True)
         oResponse.Send
+
+        ' Clear selection if a response is sent
+        Application.ActiveExplorer.CurrentFolder.Items(1).Display
+        Application.ActiveExplorer.ClearSelection
+        Application.ActiveExplorer.Selection.Item(1).Delete
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Decline
+        cAppt.MeetingStatus = olMeetingDeclined
     End If
 
-    Application.ActiveExplorer.Selection.Item(1).Delete
-
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
 
     Set cAppt = Nothing
     Set oResponse = Nothing
@@ -38,16 +38,18 @@ Sub AcceptAndDelete()
         Dim oResponse As MeetingItem
         Set oResponse = cAppt.Respond(olMeetingAccepted, True)
         oResponse.Send
+
+        Application.ActiveExplorer.Selection.Item(1).Delete
+
+        ' Mark next item as read
+        Application.ActiveExplorer.CurrentFolder.Items(1).Display
+        Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just accept the meeting without sending a response
         cAppt.Accept
+        cAppt.MeetingStatus = olMeetingAccepted
+
     End If
 
-    Application.ActiveExplorer.Selection.Item(1).Delete
-
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
 
     Set cAppt = Nothing
     Set oResponse = Nothing
@@ -65,19 +67,20 @@ Sub DeclineandMessage()
     If cAppt.ResponseRequested = True Then ' check if a response is needed
         Dim oResponse As MeetingItem
         Set oResponse = cAppt.Respond(olMeetingDeclined, True)
-        ' Add message here
         oResponse.Body = "Automated Message: Thanks but I will not be able to attend, please slack/email me for more details"
         oResponse.Send
+
+        Application.ActiveExplorer.Selection.Item(1).Delete
+
+        ' Mark next item as read
+        Application.ActiveExplorer.CurrentFolder.Items(1).Display
+        Application.ActiveExplorer.ClearSelection
     Else ' if no response is needed, just decline the meeting without sending a response
         cAppt.Decline
+        cAppt.MeetingStatus = olMeetingDeclined
+
     End If
 
-    Application.ActiveExplorer.Selection.Item(1).Delete
-
-    ' Mark next item as read
-    Application.ActiveExplorer.ClearSelection
-    Application.ActiveExplorer.CurrentFolder.Items(1).Display
-    Application.ActiveExplorer.ClearSelection
 
     Set cAppt = Nothing
     Set oResponse = Nothing
