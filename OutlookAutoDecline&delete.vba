@@ -7,6 +7,7 @@ Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
     Dim objAppt As Outlook.AppointmentItem
     Dim arrEntryID() As String
     Dim intCounter As Integer
+    Dim senderEmail As String
 
     'Split the EntryIDCollection into an array
     arrEntryID = Split(EntryIDCollection, ",")
@@ -24,8 +25,15 @@ Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
             Set objMeeting = objOL.Session.GetItemFromID(arrEntryID(intCounter))
 
             'Check if the sender's email address is from Product Club or AMPO Communications
-            If InStr(1, LCase(objMeeting.SenderEmailAddress), "productclub", vbTextCompare) > 0 _
-                Or InStr(1, LCase(objMeeting.SenderEmailAddress), "ampo.communications", vbTextCompare) > 0 _
+            On Error Resume Next
+            senderEmail = objMeeting.Sender.GetExchangeUser().PrimarySmtpAddress
+            If Err.Number <> 0 Then
+                senderEmail = objMeeting.SenderEmailAddress
+            End If
+            On Error GoTo 0
+
+            If InStr(1, LCase(senderEmail), "productclub", vbTextCompare) > 0 _
+                Or InStr(1, LCase(senderEmail), "ampo.communications", vbTextCompare) > 0 _
             Then
 
                 'Get the associated appointment
@@ -40,11 +48,6 @@ Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
 
                 'Delete the appointment
                 objAppt.Delete
-
-                'Check to make sure the appointment was actually deleted
-                If Not objAppt.Exists Then
-                    Debug.Print "Appointment deleted successfully."
-                End If
 
             End If
 
