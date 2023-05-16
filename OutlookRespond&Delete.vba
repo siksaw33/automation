@@ -6,15 +6,21 @@ Sub DeclineAndDelete()
     ' Mark item as read
     Application.ActiveExplorer.Selection.Item(1).UnRead = False
 
-    If cAppt.ResponseRequested = True Then ' check if a response is needed
-        Dim oResponse As MeetingItem
-        Set oResponse = cAppt.Respond(olMeetingDeclined, True)
-        oResponse.Send
+    ' Check if the meeting is cancelled
+    If cAppt.MeetingStatus = olMeetingCanceled Then
+        ' Delete the meeting
+        cAppt.Delete
+    Else
+        If cAppt.ResponseRequested = True Then ' check if a response is needed
+            Dim oResponse As MeetingItem
+            Set oResponse = cAppt.Respond(olMeetingDeclined, True)
+            oResponse.Send
 
-        Application.ActiveExplorer.Selection.Item(1).Delete
-    Else ' if no response is needed, just decline the meeting without sending a response
-        cAppt.Respond (olMeetingDeclined)
-        Application.ActiveExplorer.Selection.Item(1).Delete
+            Application.ActiveExplorer.Selection.Item(1).Delete
+        Else ' if no response is needed, just decline the meeting without sending a response
+            cAppt.Respond (olMeetingDeclined)
+            Application.ActiveExplorer.Selection.Item(1).Delete
+        End If
     End If
 
     ' Mark first item in Deleted Items folder as read
@@ -24,6 +30,7 @@ Sub DeclineAndDelete()
     Set oResponse = Nothing
 
 End Sub
+
 
 Sub AcceptAndDelete()
 
