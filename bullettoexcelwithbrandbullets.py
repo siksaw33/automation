@@ -3,7 +3,10 @@ from openpyxl import Workbook
 import re
 
 # Extract text from docx file
-doc_result = docx2python('input.docx')
+variable='PWPTravel'
+input=f'{variable}.docx'
+output=f'{variable}.xlsx'
+doc_result = docx2python(input)
 text = doc_result.text
 
 # Split text into lines
@@ -28,7 +31,7 @@ for line in lines:
                 # Replace all Ctrl+J with <br>
                 cell_text = cell_text.replace('\n', '<br>')
                 # Replace all numbered bullets with dot bullets
-                cell_text = re.sub(r'^\d+\.', '.', cell_text, flags=re.MULTILINE)
+                cell_text = re.sub(r'^\d+\)', '.', cell_text, flags=re.MULTILINE)
                 
                 ws.cell(row=row_counter, column=1).value = cell_text.strip()
                 row_counter += 1
@@ -41,9 +44,15 @@ if cell_text:
     # Replace all Ctrl+J with <br>
     cell_text = cell_text.replace('\n', '<br>')
     # Replace all numbered bullets with dot bullets
-    cell_text = re.sub(r'^\d+\.', '.', cell_text, flags=re.MULTILINE)
+    cell_text = re.sub(r'^\d+\)', '.', cell_text, flags=re.MULTILINE)
     
     ws.cell(row=row_counter, column=1).value = cell_text.strip()
 
+#add empty columns
+ws.insert_cols(1)
+ws.insert_cols(3)
+ws.cell(row=1,column=1).value='Description'
+ws.cell(row=1,column=3).value='Name'
+
 # Save the workbook
-wb.save('output.xlsx')
+wb.save(output)
